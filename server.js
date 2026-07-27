@@ -22,6 +22,7 @@ if (!process.env.DB_PASSWORD) {
 }
 
 const app = express();
+app.set('trust proxy', 1); // Fixes the rate-limit warning behind Render's proxy
 
 app.use(helmet({
     contentSecurityPolicy: {
@@ -58,6 +59,8 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    port: process.env.DB_PORT,       // Added port variable
+    ssl: { rejectUnauthorized: false }, // Forces SSL connection for Aiven
     waitForConnections: true,
     connectionLimit: 10
 });
