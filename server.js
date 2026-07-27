@@ -25,6 +25,7 @@ const app = express();
 app.set('trust proxy', 1); // Fixes the rate-limit warning behind Render's proxy
 
 app.use(helmet({
+    crossOriginResourcePolicy: false,
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
