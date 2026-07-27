@@ -1,4 +1,3 @@
-// Single place to change the backend URL (e.g. to an https:// address in production)
 const API_BASE_URL = 'https://cst-25-attendance-tracker.onrender.com';
 
 const loginForm = document.getElementById('loginForm');
