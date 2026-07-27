@@ -1,0 +1,609 @@
+/* ============================================
+   CST'25 — Login Page Stylesheet
+   θ <code;>
+   ============================================ */
+
+/* --- RESET & BASE --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- ROOT TOKENS --- */
+:root {
+    --bg-deep:        #0b1120;
+    --bg-card:        rgba(255, 255, 255, 0.04);
+    --border-card:    rgba(255, 255, 255, 0.10);
+    --border-input:   rgba(255, 255, 255, 0.09);
+    --blue:           #0284c7;
+    --indigo:         #4f46e5;
+    --sky:            #38bdf8;
+    --sky-light:      #7dd3fc;
+    --text-bright:    #f8fafc;
+    --text-muted:     #94a3b8;
+    --text-dim:       #64748b;
+    --btn-disabled-bg:#1e293b;
+    --shadow-card:    0 25px 60px rgba(0, 0, 0, 0.45),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    --shadow-btn:     0 4px 20px rgba(79, 70, 229, 0.35);
+    --shadow-btn-hover: 0 8px 28px rgba(79, 70, 229, 0.50);
+    --radius-input:   14px;
+    --radius-card:    24px;
+    --radius-btn:     14px;
+    --transition:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- BODY & PAGE SHELL --- */
+body {
+    background: var(--bg-deep);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    /* subtle animated star-noise overlay */
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.06) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.04) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.05) 0%, transparent 100%);
+}
+
+/* --- ANIMATED BACKGROUND ORBS --- */
+.container::before,
+.container::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+}
+
+.container::before {
+    width: 520px;
+    height: 520px;
+    top: -120px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.20) 0%, transparent 65%);
+    animation: orbFloat1 10s ease-in-out infinite;
+}
+
+.container::after {
+    width: 450px;
+    height: 450px;
+    bottom: -100px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.20) 0%, transparent 65%);
+    animation: orbFloat2 13s ease-in-out infinite;
+}
+
+/* --- LAYOUT CONTAINER --- */
+.container {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    z-index: 1;
+}
+
+/* --- LOGIN CARD --- */
+.login-card {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-card);
+    padding: 52px 42px 44px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+
+    /* entrance animation */
+    animation: cardSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* subtle shimmer border on hover */
+.login-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: calc(var(--radius-card) + 1px);
+    background: linear-gradient(135deg,
+        rgba(56, 189, 248, 0.18),
+        transparent 40%,
+        rgba(99, 102, 241, 0.14));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.login-card:hover::before {
+    opacity: 1;
+}
+
+.login-card:hover {
+    transform: translateY(-3px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- HEADING --- */
+h1 {
+    color: var(--text-bright);
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: 1px;
+    line-height: 1.25;
+
+    /* gradient text accent */
+    background: linear-gradient(135deg, #f8fafc 30%, var(--sky) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    animation: fadeInDown 0.6s 0.2s both;
+}
+
+/* --- FORM --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* --- INPUT GROUP --- */
+.input-group {
+    position: relative;
+    animation: fadeInUp 0.5s both;
+}
+
+.input-group:nth-child(1) { animation-delay: 0.25s; }
+.input-group:nth-child(2) { animation-delay: 0.35s; }
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-input);
+    color: var(--text-bright);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+#password {
+    padding-right: 50px;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.55);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.10),
+                0 0 20px rgba(56, 189, 248, 0.12);
+    transform: translateY(-1px);
+}
+
+input::placeholder {
+    color: var(--text-dim);
+    transition: color 0.2s;
+}
+
+input:focus::placeholder {
+    color: var(--text-muted);
+}
+
+/* --- REMEMBER ROW --- */
+.remember-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2px 0 6px;
+    font-size: 0.85rem;
+    animation: fadeInUp 0.5s 0.4s both;
+}
+
+/* --- CHECKBOX STYLES --- */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.checkbox-container:hover {
+    color: var(--text-bright);
+}
+
+#me,
+#tc {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+#me:hover,
+#tc:hover {
+    border-color: var(--sky);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+#me:checked,
+#tc:checked {
+    background: linear-gradient(135deg, var(--blue), var(--indigo));
+    border-color: transparent;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.30);
+    animation: checkPop 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#me:checked::after,
+#tc:checked::after {
+    content: '';
+    position: absolute;
+    top: 2.5px;
+    left: 5px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/* --- FORGOT LINK --- */
+.forgot-link {
+    color: var(--sky);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+.forgot-link:hover {
+    color: var(--sky-light);
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+}
+
+/* --- TERMS ROW --- */
+.terms {
+    color: var(--text-muted);
+    text-align: left;
+    font-size: 0.85rem;
+    animation: fadeInUp 0.5s 0.45s both;
+}
+
+.terms .checkbox-container {
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* --- LOGIN BUTTON --- */
+.login-btn {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: var(--radius-btn);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    animation: fadeInUp 0.5s 0.5s both;
+}
+
+/* shine sweep on hover */
+.login-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.login-btn:not(:disabled):hover::after {
+    left: 150%;
+}
+
+.login-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    filter: brightness(1.08);
+}
+
+.login-btn:not(:disabled):active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.25);
+}
+
+/* DISABLED STATE */
+.login-btn:disabled {
+    background: var(--btn-disabled-bg) !important;
+    color: var(--text-dim) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+}
+
+/* ENABLED STATE — set via JS by removing disabled */
+.login-btn:not(:disabled) {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--indigo) 100%);
+    box-shadow: var(--shadow-btn);
+}
+
+/* --- FOOTER --- */
+footer {
+    position: relative;
+    z-index: 2;
+    padding: 18px 20px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(10, 15, 28, 0.7);
+    letter-spacing: 0.3px;
+    animation: fadeIn 1s 0.7s both;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes cardSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33%       { transform: translateY(24px) translateX(-12px); }
+    66%       { transform: translateY(-14px) translateX(10px); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    40%       { transform: translateY(-20px) translateX(14px); }
+    70%       { transform: translateY(16px) translateX(-8px); }
+}
+
+@keyframes checkPop {
+    0%   { transform: scale(0.7); }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================
+   REDUCED MOTION — accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — mobile
+   ============================================ */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 36px 24px 32px;
+        border-radius: 18px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 28px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    .login-btn {
+        height: 50px;
+    }
+}
+
+/* ============================================
+   PASSWORD VISIBILITY TOGGLE
+   ============================================ */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: var(--sky);
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid var(--sky);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* ============================================
+   LOGIN BUTTON — LOADING STATE
+   ============================================ */
+.login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+.login-btn.is-loading .btn-spinner {
+    display: inline-block;
+}
+
+.login-btn.is-loading {
+    cursor: wait;
+    filter: brightness(0.95);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   TOAST NOTIFICATIONS
+   Replaces alert() with glass-panel toasts that
+   match the login card's blur/border/shadow treatment.
+   ============================================ */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 360px;
+    width: calc(100% - 40px);
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-card);
+    border-left: 3px solid var(--sky);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--text-bright);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    box-shadow: var(--shadow-card);
+    animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.toast.toast-error { border-left-color: #ef4444; }
+.toast.toast-success { border-left-color: #10b981; }
+.toast.toast-info { border-left-color: var(--sky); }
+
+.toast.is-leaving {
+    animation: toastOut 0.25s ease forwards;
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.toast-message {
+    flex-grow: 1;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 0 0 6px;
+    flex-shrink: 0;
+}
+
+.toast-close:hover {
+    color: var(--text-bright);
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastOut {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(24px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast, .btn-spinner {
+        animation-duration: 0.01ms !important;
+    }
+}

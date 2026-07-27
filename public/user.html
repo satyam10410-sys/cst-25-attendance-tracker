@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard — CST'25</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/jpeg" href="group.jpeg">
+</head>
+
+<body class="dark-mode">
+    <div class="container">
+        <div class="mobile-nav-bar">
+            <div class="menu-content">
+                <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <span class="mobile-logo">CST · MY COURSES</span>
+            </div>
+            <div>
+                <button class="logout-btn" id="logoutBtn">Sign out</button>
+            </div>
+        </div>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <div class="main-content">
+            <div class="header-section">
+                <div class="student-greeting">
+                    <div class="student">
+                        <h1 id="welcome-message">
+                            Welcome <span id="user-name-greeting"><span class="skeleton"></span></span>, to Your Space
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+                <hr class="info-divider">
+                <div class="avatar-wrap" id="avatarWrap">
+                    <img class="profile-img" id="profile-img"
+                        src="https://cdn-icons-png.flaticon.com/128/1144/1144760.png" height="52" width="52"
+                        alt="Profile Picture">
+                    <div class="avatar-overlay" id="avatarOverlay" role="button" tabindex="0"
+                        aria-label="Change profile picture">
+                        <span class="avatar-camera-icon">📷</span>
+                    </div>
+                </div>
+                <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/webp" hidden>
+                <div class="avatar-actions">
+                    <button type="button" id="avatar-change-btn" class="avatar-btn">Change Photo</button>
+                    <button type="button" id="avatar-remove-btn" class="avatar-btn avatar-btn-remove"
+                        hidden>Remove Photo</button>
+                </div>
+                <p class="info-heading">Student Record</p>
+                <ol class="personal">
+                    <li>
+                        <b>Name</b>
+                        <span id="user-name"><span class="skeleton"></span></span>
+                    </li>
+                    <li>
+                        <b>Roll No.</b>
+                        <span id="user-roll"><span class="skeleton"></span></span>
+                    </li>
+                    <li>
+                        <b>Institute Email</b>
+                        <span id="user-email"><span class="skeleton"></span></span>
+                    </li>
+                    <li>
+                        <b>Today's Date</b>
+                        <span id="today-date"></span>
+                    </li>
+                    <li>
+                        <b>Time</b>
+                        <span id="today-time"></span>
+                    </li>
+                </ol>
+
+                <div class="website-setting">
+                    <br><button id="theme">
+                        <span id="sun-moon">🌙</span>
+                        <span id="theme-text">Switch to Light Mode</span>
+                    </button>
+                    <a href="https://lasyplatform.web.app/2nd-year/branches/Chemistry.html"
+                        style="text-decoration: none; color:#fc05fc;">Explore Resources</a>
+                </div>
+
+                <div id="dynamic-content-area">
+                    <div id="explore-state" style="text-align: center; padding: 40px 20px; color: var(--text-light);">
+                        <div style="font-size: 2rem; margin-bottom: 15px; opacity: 1;">👈</div>
+                        <h3 style="font-family: var(--font-main); font-weight: 500; color: var(--text-mid);">Ready to
+                            mark attendance?</h3>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">Select a course from the sidebar to view your
+                            stats.</p>
+                    </div>
+
+                    <div id="course-details" style="display: none;">
+                        <img id="detail-image" src="" alt="Course Image">
+                        <div class="course-detail-badge">Course Details</div><br>
+                        <h2 id="detail-title"></h2><br>
+                        <p id="detail-code"></p><br>
+                        <p id="detail-ltpc"></p><br>
+                        <p id="classes-in-week"></p><br>
+                        <p id="professor-details"></p><br>
+                        <div class="attendance-row">
+                            <label class="attendance-label">
+                                <button id="attendance">Mark me present for today</button>
+                            </label>
+                        </div>
+                        <p id="total-no-of-classes"></p>
+                        <div class="attendance-circle">
+                            <svg width="120" height="120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#eee" stroke-width="10" />
+                                <circle id="progress" cx="60" cy="60" r="50" fill="none" stroke="#4CAF50"
+                                    stroke-width="10" stroke-linecap="round" transform="rotate(-90 60 60)" />
+                            </svg>
+                            <div class="percent-text">0%</div>
+                        </div>
+                        <p id="warning-text" style="display:none;">! Your attendance is less than 75% !</p>
+                        <p id="bunk-margin-text"
+                            style="margin-top: 15px; font-weight: 500; text-align: center; font-size: 0.95rem;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Classes -->
+            <div class="upcoming-card info">
+                <h2 class="section-title" align="center">📅 Upcoming Classes <span id="today-day"></span></h2>
+                <div id="upcoming-classes">
+                    <!-- JS will fill this -->
+                </div>
+            </div>
+
+            <!-- To-Do Tracker -->
+            <div class="todo-card info">
+                <h2 align="center" class="section-title">📝 Tasks & <span style="background: linear-gradient(to right, #3A7BD5 0%, #2099B5 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;">
+                        Deadlines</span></h2>
+
+                <!-- New Daily Reminder Banner -->
+                <div id="todo-daily-reminder"
+                    style="display: none; background: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: 500; text-align: center; border: 1px solid #ffeeba; font-size: 0.95rem;">
+                </div>
+
+                <div class="todo-input-group">
+                    <input type="text" id="todo-input" placeholder="Add a new assignment or reminder...">
+                    <button id="todo-add-btn">Add</button>
+                </div>
+                <ul id="todo-list" class="todo-list">
+                </ul>
+            </div>
+            <div class="comments info">
+                <h2 align="center" class="section-title">✨ Daily <span style="background: linear-gradient(to right, #3A7BD5 0%, #2099B5 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;">Reflection</span></h2>
+
+                <textarea id="journal-input" rows="4" maxlength="2000"
+                    placeholder="How did you spend your day today? Type here and hit share..."></textarea>
+                <div class="journal-meta">
+                    <span id="journal-char-count" class="journal-char-count">0 / 2000</span>
+                </div>
+
+                <div style="text-align: right;">
+                    <button id="journal-submit-btn">
+                        Share with Dashboard
+                    </button>
+                </div>
+
+                <div id="journal-feedback"></div>
+
+                <div class="journal-history-wrap">
+                    <div class="journal-history-header">
+                        <button type="button" id="journal-history-toggle" class="journal-history-toggle" aria-expanded="false">
+                            <span id="journal-history-label">Past Reflections (0)</span>
+                            <span class="journal-history-caret">▾</span>
+                        </button>
+                        <button type="button" id="journal-history-clear" class="journal-history-clear" hidden>Clear all</button>
+                    </div>
+                    <ul id="journal-history-list" class="journal-history-list" hidden></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="courses" id="sidebarCourses">
+            <div class="sidebar-header">
+                <p class="sidebar-logo">CST'25 · IIT Patna</p>
+                <h1 class="mycoursesheading">My Courses</h1>
+            </div>
+            <ul>
+                <li class="course" data-title="ORGANIC CHEMISTRY" data-ltpc="L-T-P-C: 3-1-0-4"
+                    data-image="https://cdn-icons-png.flaticon.com/128/18629/18629540.png" data-code="CH2101">
+                    <p>Organic Chemistry</p>
+                    <p>CH2101</p>
+                    <p class="days">[Tue,Wed,Fri]</p>
+                </li>
+                <li class="course" data-title="INORGANIC CHEMISTRY" data-ltpc="L-T-P-C: 3-1-0-4"
+                    data-image="https://cdn-icons-png.flaticon.com/128/18531/18531598.png" data-code="CH2102">
+                    <p>Inorganic Chemistry</p>
+                    <p>CH2102</p>
+                    <p class="days">[Wed,Thu,Fri]</p>
+                </li>
+                <li class="course" data-title="INTRODUCTION TO QUANTUM CHEMISTRY" data-ltpc="L-T-P-C: 3-1-0-4"
+                    data-image="https://cdn-icons-png.flaticon.com/128/11439/11439560.png" data-code="CH2103">
+                    <p>Introduction to Quantum Chemistry</p>
+                    <p>CH2103</p>
+                    <p class="days">[Mon,Thu,Fri]</p>
+                </li>
+                <li class="course" data-title="FLUID MECHANICS" data-ltpc="L-T-P-C: 3-1-2-5"
+                    data-image="https://cdn-icons-png.flaticon.com/128/1184/1184130.png" data-code="CH2104">
+                    <p>Fluid Mechanics</p>
+                    <p>CH2104</p>
+                    <p class="days">[Mon,Wed,Fri]</p>
+                </li>
+                <li class="course" data-title="CHEMICAL PROCESS CALCULATIONS" data-ltpc="L-T-P-C: 3-0-0-3"
+                    data-image="https://cdn-icons-png.flaticon.com/128/13407/13407679.png" data-code="CH2105">
+                    <p>Chemical Process Calculations</p>
+                    <p>CH2105</p>
+                    <p class="days">[Tue,Wed,Thu]</p>
+                </li>
+                <li class="course" data-title="HSS ELECTIVE-I" data-ltpc="L-T-P-C: 3-0-0-3" data-code="HS21PQ">
+                    <p>HSS Elective-I</p>
+                    <p>HS21PQ</p>
+                    <p class="days">[Wed,Thu,Fri]</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Crafted, Designed, Scripted, Baked and Coded with 💙 by &lt;Satyam  Kumar city="Patna" /&gt;;</p>
+        <a href="https://wa.me/+919334577881" style="text-decoration: none; color:rgb(41, 159, 41);">Submit a feedback
+            to the owner</a>
+    </footer>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <script src="user.js" type="module"></script>
+</body>
+
+</html>
