@@ -350,7 +350,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
 
     const courseProfessor = {
-        "CH2101": "professor_organic",
+        "CH2101": "Dr. Rajendra Kumar Konidena",
         "CH2102": "professor_inorganic",
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
