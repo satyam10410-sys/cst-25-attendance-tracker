@@ -279,7 +279,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2102": "professor_inorganic",
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
-        "CH2105": "professor_chemical",
+        "CH2105": "Prof. Samantha",
         "HS21PQ": "professor_hss"
     };
 
