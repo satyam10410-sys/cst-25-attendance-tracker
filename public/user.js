@@ -61,6 +61,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     const selectedElectiveKey = (sessionStorage.getItem('selectedHSCourse') || 'hs2110').toLowerCase();
     const electiveInfo = HS_ELECTIVE_INFO[selectedElectiveKey] || HS_ELECTIVE_INFO['hs2110'];
 
+    // Your attendance_management table has one fixed column for this elective
+    // slot: hs21pq. No matter which specific HS course (hs2110/2111/2112) the
+    // person picked, every attendance request must still target that same
+    // column — so this key stays constant and is what actually gets sent to
+    // the backend. electiveInfo above is only used for what's shown on screen.
+    const ATTENDANCE_BACKEND_KEY = 'HS21PQ';
+
     // ------------------------------------------------------------------
     // TOAST NOTIFICATIONS
     // ------------------------------------------------------------------
@@ -263,7 +270,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     // specific course the person picked at login (HS2110 / HS2111 / HS2112).
     const hsListItem = document.querySelector('.courses ul li[data-code="HS21PQ"]');
     if (hsListItem) {
-        hsListItem.dataset.code = electiveInfo.code;
+        hsListItem.dataset.code = ATTENDANCE_BACKEND_KEY; // stays fixed — this is what backend requests use
+        hsListItem.dataset.displayCode = electiveInfo.code; // shown to the student
         hsListItem.dataset.title = electiveInfo.name.toUpperCase();
         hsListItem.dataset.ltpc = electiveInfo.ltpc;
         if (electiveInfo.image) hsListItem.dataset.image = electiveInfo.image;
@@ -330,11 +338,14 @@ window.addEventListener('DOMContentLoaded', async () => {
         },
     };
 
-    // The elective slot is filled dynamically with whichever HS course was
-    // chosen at login, instead of a single hardcoded "HS21PQ" entry.
-    courseSchedule[electiveInfo.code] = {
+    // The elective slot's schedule/name changes to whatever HS course was
+    // picked at login, but it's stored under the fixed ATTENDANCE_BACKEND_KEY
+    // ("HS21PQ") because that's the only column your attendance_management
+    // table has for this slot — this way "Mark Present" for hs2110, hs2111,
+    // or hs2112 all end up writing to that same hs21pq column.
+    courseSchedule[ATTENDANCE_BACKEND_KEY] = {
         name: electiveInfo.name,
-        code: electiveInfo.code,
+        code: ATTENDANCE_BACKEND_KEY,
         schedule: electiveInfo.schedule
     };
 
@@ -344,7 +355,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
         "CH2105": "Dr. Sujoy Kumar Samanta",
-        [electiveInfo.code]: "professor_hss"
+        [ATTENDANCE_BACKEND_KEY]: "professor_hss"
     };
 
     const semesterStartDate = new Date('2026-07-28');
@@ -485,7 +496,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
             const title = course.getAttribute('data-title');
             const ltpc = course.getAttribute('data-ltpc');
-            const code = course.getAttribute('data-code');
+            const code = course.getAttribute('data-code'); // used for schedule lookup + backend requests
+            const displayCode = course.getAttribute('data-display-code') || code; // shown to the student
             const imageSrc = course.getAttribute('data-image');
             const displayDays = document.getElementById("classes-in-week");
             const displayProfs = document.getElementById("professor-details");
@@ -547,7 +559,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                 detailTitle.textContent = title;
                 detailLtpc.textContent = ltpc;
-                detailCode.textContent = code;
+                detailCode.textContent = displayCode;
 
                 if (imageSrc) {
                     detailImage.src = imageSrc;
