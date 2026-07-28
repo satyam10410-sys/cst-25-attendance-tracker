@@ -1803,3 +1803,26 @@ body.dark-mode .time-slot {
         float: none;
     }
 }
+
+.no-class-btn {
+    background-image: linear-gradient(135deg, #64748b, #94a3b8) !important;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.95;
+    animation: none !important;
+    box-shadow:
+        0 6px 18px rgba(100, 116, 139, 0.35),
+        inset 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.no-class-btn:hover {
+    transform: none;
+    background-image: linear-gradient(135deg, #64748b, #94a3b8) !important;
+    box-shadow:
+        0 6px 18px rgba(100, 116, 139, 0.35),
+        inset 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.no-class-btn:disabled {
+    opacity: 1;
+}

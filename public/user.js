@@ -110,8 +110,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     // ==================== PROFILE AVATAR ====================
     const DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/128/1144/1144760.png";
     const AVATAR_KEY = `avatar_${user.roll}`;
-    const AVATAR_OUTPUT_SIZE = 200; 
-    const MAX_AVATAR_SOURCE_SIZE = 5 * 1024 * 1024; 
+    const AVATAR_OUTPUT_SIZE = 200;
+    const MAX_AVATAR_SOURCE_SIZE = 5 * 1024 * 1024;
 
     const avatarImg = document.getElementById('profile-img');
     const avatarWrap = document.getElementById('avatarWrap');
@@ -176,7 +176,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     avatarFileInput.addEventListener('change', async () => {
         const file = avatarFileInput.files[0];
-        avatarFileInput.value = ''; 
+        avatarFileInput.value = '';
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
@@ -220,58 +220,58 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // ==================== COURSE SCHEDULE DATA ====================
     const courseSchedule = {
-        "CH2101": { 
-            name: "Organic Chemistry", code: "CH2101", 
+        "CH2101": {
+            name: "Organic Chemistry", code: "CH2101",
             schedule: [
-                { day: "Tuesday", time: "16:00 - 16:55", type: "Lecture" }, 
-                { day: "Wednesday", time: "09:00 - 09:55", type: "Tutorial" }, 
-                { day: "Wednesday", time: "10:00 - 10:55", type: "Lecture" }, 
+                { day: "Tuesday", time: "16:00 - 16:55", type: "Lecture" },
+                { day: "Wednesday", time: "09:00 - 09:55", type: "Tutorial" },
+                { day: "Wednesday", time: "10:00 - 10:55", type: "Lecture" },
                 { day: "Friday", time: "17:00 - 17:55", type: "Lecture" }
-            ] 
+            ]
         },
-        "CH2102": { 
-            name: "Inorganic Chemistry", code: "CH2102", 
+        "CH2102": {
+            name: "Inorganic Chemistry", code: "CH2102",
             schedule: [
-                { day: "Wednesday", time: "11:00 - 11:55", type: "Lecture" }, 
-                { day: "Thursday", time: "10:00 - 10:55", type: "Tutorial" }, 
-                { day: "Thursday", time: "11:00 - 11:55", type: "Lecture" }, 
+                { day: "Wednesday", time: "11:00 - 11:55", type: "Lecture" },
+                { day: "Thursday", time: "10:00 - 10:55", type: "Tutorial" },
+                { day: "Thursday", time: "11:00 - 11:55", type: "Lecture" },
                 { day: "Friday", time: "12:00 - 12:55", type: "Lecture" }
-            ] 
+            ]
         },
-        "CH2103": { 
-            name: "Introduction to Quantum Chemistry", code: "CH2103", 
+        "CH2103": {
+            name: "Introduction to Quantum Chemistry", code: "CH2103",
             schedule: [
-                { day: "Monday", time: "17:00 - 17:55", type: "Lecture" }, 
-                { day: "Thursday", time: "17:00 - 17:55", type: "Lecture" }, 
-                { day: "Friday", time: "09:00 - 09:55", type: "Tutorial" }, 
+                { day: "Monday", time: "17:00 - 17:55", type: "Lecture" },
+                { day: "Thursday", time: "17:00 - 17:55", type: "Lecture" },
+                { day: "Friday", time: "09:00 - 09:55", type: "Tutorial" },
                 { day: "Friday", time: "16:00 - 16:55", type: "Lecture" }
-            ] 
+            ]
         },
-        "CH2104": { 
-            name: "Fluid Mechanics", code: "CH2104", 
+        "CH2104": {
+            name: "Fluid Mechanics", code: "CH2104",
             schedule: [
-                { day: "Monday", time: "16:00 - 16:55", type: "Lecture" }, 
-                { day: "Wednesday", time: "15:00 - 15:55", type: "Lecture" }, 
-                { day: "Friday", time: "10:00 - 11:00", type: "Lab" }, 
+                { day: "Monday", time: "16:00 - 16:55", type: "Lecture" },
+                { day: "Wednesday", time: "15:00 - 15:55", type: "Lecture" },
+                { day: "Friday", time: "10:00 - 11:00", type: "Lab" },
                 { day: "Friday", time: "15:00 - 15:55", type: "Lecture" }
-            ] 
+            ]
         },
-        "CH2105": { 
-            name: "Chemical Process Calculations", code: "CH2105", 
+        "CH2105": {
+            name: "Chemical Process Calculations", code: "CH2105",
             schedule: [
-                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture" }, 
-                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture" }, 
+                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture" },
+                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture" },
                 { day: "Thursday", time: "15:00 - 15:55", type: "Lecture" }
-            ] 
+            ]
         },
-        "HS21PQ": { 
-            name: "HSS Elective-I", code: "HS21PQ", 
+        "HS21PQ": {
+            name: "HSS Elective-I", code: "HS21PQ",
             schedule: [
-                { day: "Tue", time: "14:00 - 15:00", type: "Lecture"},
-                { day: "Wednesday", time: "15:00 - 16:00", type: "Lecture" }, 
-                { day: "Thursday", time: "16:00 - 17:00", type: "Lecture" }, 
+                { day: "Tuesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Wednesday", time: "15:00 - 16:00", type: "Lecture" },
+                { day: "Thursday", time: "16:00 - 17:00", type: "Lecture" },
                 { day: "Friday", time: "14:00 - 15:00", type: "Lecture" }
-            ] 
+            ]
         }
     };
 
@@ -280,7 +280,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2102": "professor_inorganic",
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
-        "CH2105": "Prof. Samantha",
+        "CH2105": "Dr. Sujoy Kumar Samanta",
         "HS21PQ": "professor_hss"
     };
 
@@ -290,7 +290,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         const today = new Date();
         let totalClasses = 0;
         const sched = courseSchedule[code.toUpperCase()]?.schedule || [];
-        
+
         for (let d = new Date(semesterStartDate); d <= today; d.setDate(d.getDate() + 1)) {
             const dayName = d.toLocaleDateString('en-US', { weekday: 'long' });
             // Count slots mapped to exactly this day
@@ -316,12 +316,12 @@ window.addEventListener('DOMContentLoaded', async () => {
         let hours = now.getHours();
         const period = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
-        if (hours === 0) hours = 12; 
-        
+        if (hours === 0) hours = 12;
+
         const hrStr = hours.toLocaleString().padStart(2, '0');
         const minStr = now.getMinutes().toLocaleString().padStart(2, '0');
         const secStr = now.getSeconds().toLocaleString().padStart(2, '0');
-        
+
         todayTime.textContent = `${hrStr} : ${minStr} : ${secStr} ${period}`;
 
         // Live update the class states when the minute rolls over
@@ -332,7 +332,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     updateClock();
     setInterval(updateClock, 1000);
-    
+
     today_day.textContent = `(${getTodayName()})`;
     today_day.style.cssText = `
     background: linear-gradient(to right, #3A7BD5 0%, #2099B5 100%);
@@ -344,7 +344,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     const theme = document.querySelector("#theme");
     const sun_moon = document.querySelector("#sun-moon");
-    const theme_text = document.querySelector("#theme-text"); 
+    const theme_text = document.querySelector("#theme-text");
 
     theme.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
@@ -383,7 +383,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                             time: slot.time,
                             exactTime: startTime,
                             isHappeningNow: isHappeningNow,
-                            type: slot.type || '' 
+                            type: slot.type || ''
                         });
                     }
                 }
@@ -495,7 +495,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                 // Inject Multiple dynamic buttons here
                 const attendanceRow = document.querySelector('.attendance-row');
-                attendanceRow.innerHTML = ''; 
+                attendanceRow.innerHTML = '';
 
                 const todayName = getTodayName();
                 const sched = courseSchedule[code.toUpperCase()]?.schedule || [];
@@ -503,12 +503,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                 if (todaySlots.length === 0) {
                     const btn = document.createElement('button');
-                    btn.className = 'attendance-btn';
-                    btn.textContent = "No Class Today";
+                    btn.id = 'attendance';
+                    btn.classList.add("no-class-btn");
+                    btn.textContent = "📅 No Class Today";
                     btn.disabled = true;
-                    btn.style.backgroundImage = "none";
-                    btn.style.backgroundColor = "#9ca3af";
-                    btn.style.cursor = "not-allowed";
+
                     attendanceRow.appendChild(btn);
                 } else {
                     todaySlots.forEach(slot => {
@@ -517,7 +516,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                         const btn = document.createElement('button');
                         btn.id = 'attendance';
-                        btn.style.margin = "0 8px"; 
+                        btn.style.margin = "0 8px";
 
                         if (isMarked) {
                             btn.textContent = `${slot.type} Marked ✓`;
@@ -544,8 +543,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     async function handleAttendanceClick(e) {
         const btn = e.target;
-        const uniqueCode = btn.dataset.uniqueCode; 
-        const baseCode = btn.dataset.baseCode; 
+        const uniqueCode = btn.dataset.uniqueCode;
+        const baseCode = btn.dataset.baseCode;
 
         btn.disabled = true;
         const originalText = btn.textContent;
@@ -682,8 +681,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     function renderTodos() {
-        const todos = loadTodos(); 
-        todoList.innerHTML = ''; 
+        const todos = loadTodos();
+        todoList.innerHTML = '';
 
         const reminderBanner = document.getElementById('todo-daily-reminder');
         const pendingTasks = todos.filter(t => !t.completed);
@@ -698,16 +697,16 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (todos.length === 0) {
-            todoList.innerHTML = '<p class="no-classes-msg">No upcoming deadlines. You are all caught up!</p>'; 
-            return; 
+            todoList.innerHTML = '<p class="no-classes-msg">No upcoming deadlines. You are all caught up!</p>';
+            return;
         }
 
         const today = new Date();
 
         todos.forEach((todo, index) => {
-            const li = document.createElement('li'); 
-            li.className = `todo-item ${todo.completed ? 'completed' : ''}`; 
-            li.dataset.index = index; 
+            const li = document.createElement('li');
+            li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            li.dataset.index = index;
 
             let pendingBadge = '';
             if (!todo.completed && todo.dateAdded) {
@@ -732,8 +731,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                 <button class="todo-delete">Delete</button>
             </div>
             </div>
-        `; 
-            todoList.appendChild(li); 
+        `;
+            todoList.appendChild(li);
         });
     }
 
@@ -757,15 +756,15 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
 
     function addTodo() {
-        const text = todoInput.value.trim(); 
-        if (text === '') return; 
+        const text = todoInput.value.trim();
+        if (text === '') return;
 
-        const todos = loadTodos(); 
-        todos.push({ text: text, completed: false, dateAdded: new Date().toDateString() }); 
-        saveTodos(todos); 
+        const todos = loadTodos();
+        todos.push({ text: text, completed: false, dateAdded: new Date().toDateString() });
+        saveTodos(todos);
 
-        todoInput.value = ''; 
-        renderTodos(); 
+        todoInput.value = '';
+        renderTodos();
     }
 
     todoAddBtn.addEventListener('click', addTodo);
