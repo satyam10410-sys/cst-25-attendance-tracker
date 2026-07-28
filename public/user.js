@@ -267,6 +267,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "HS21PQ": { 
             name: "HSS Elective-I", code: "HS21PQ", 
             schedule: [
+                { day: "Tue", time: "14:00 - 15:00", type: "Lecture"},
                 { day: "Wednesday", time: "15:00 - 16:00", type: "Lecture" }, 
                 { day: "Thursday", time: "16:00 - 17:00", type: "Lecture" }, 
                 { day: "Friday", time: "14:00 - 15:00", type: "Lecture" }
