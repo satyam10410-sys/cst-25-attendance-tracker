@@ -28,6 +28,20 @@
                     </button>
                 </div>
 
+                <div class="input-group select-group">
+                    <label for="hsElective" class="select-label">Choose Your Elective</label>
+                    <div class="select-wrapper">
+                        <select id="hsElective" name="hsElective" required>
+                            <option value="" disabled selected>Select your HS elective</option>
+                            <option value="hs2110">Language, Human Mind and Indian Society (HS2110)</option>
+                            <option value="hs2111">Sociology (HS2111)</option>
+                            <option value="hs2112">Demography (HS2112)</option>
+                        </select>
+                        <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <p class="select-locked-note" id="electiveLockedNote" hidden>You've already chosen your elective for this session — logging out won't let you change it.</p>
+                </div>
+
                 <div class="remember-row">
                     <label class="checkbox-container">
                         <input type="checkbox" id="me" name="me">

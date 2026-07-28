@@ -167,6 +167,7 @@ h1 {
 
 .input-group:nth-child(1) { animation-delay: 0.25s; }
 .input-group:nth-child(2) { animation-delay: 0.35s; }
+.input-group:nth-child(3) { animation-delay: 0.4s; }
 
 input[type="text"],
 input[type="password"] {
@@ -208,6 +209,102 @@ input::placeholder {
 
 input:focus::placeholder {
     color: var(--text-muted);
+}
+
+/* --- ELECTIVE SELECT GROUP --- */
+.select-group {
+    text-align: left;
+}
+
+.select-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    width: 100%;
+    height: 56px;
+    padding: 0 44px 0 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-input);
+    color: var(--text-bright);
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: var(--transition);
+}
+
+/* style the placeholder / options for browsers that support it */
+.select-wrapper select option {
+    background: var(--bg-deep);
+    color: var(--text-bright);
+}
+
+.select-wrapper select option:disabled {
+    color: var(--text-dim);
+}
+
+.select-wrapper select:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.select-wrapper select:focus {
+    background-color: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.55);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.10),
+                0 0 20px rgba(56, 189, 248, 0.12);
+    transform: translateY(-1px);
+}
+
+.select-wrapper select:invalid {
+    color: var(--text-dim);
+}
+
+.select-wrapper .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    pointer-events: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.select-wrapper select:focus ~ .select-arrow {
+    color: var(--sky);
+}
+
+/* LOCKED / DISABLED STATE — once an elective has been chosen this session */
+.select-wrapper select:disabled {
+    background: var(--btn-disabled-bg);
+    border-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.select-wrapper select:disabled ~ .select-arrow {
+    opacity: 0.4;
+}
+
+.select-locked-note {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--sky-light);
+    line-height: 1.4;
 }
 
 /* --- REMEMBER ROW --- */

@@ -9,6 +9,14 @@ const loginBtn = document.getElementById('loginBtn');
 const loginBtnText = document.getElementById('loginBtnText');
 const togglePasswordBtn = document.getElementById('togglePassword');
 const toastContainer = document.getElementById('toastContainer');
+const electiveSelect = document.getElementById('hsElective');
+const electiveLockedNote = document.getElementById('electiveLockedNote');
+
+// Session-only keys — deliberately sessionStorage (NOT localStorage, no backend
+// call either) so the elective choice is remembered only for this browser tab
+// session. Closing the tab/browser clears it and the person can pick again.
+const HS_ELECTIVE_KEY = 'selectedHSCourse';
+const HS_ELECTIVE_LOCK_KEY = 'hsCourseLocked';
 
 // ------------------------------------------------------------------
 // TOAST NOTIFICATIONS
@@ -75,6 +83,16 @@ window.addEventListener('DOMContentLoaded', () => {
         rollInput.value = savedRoll;
         rememberCheckbox.checked = true;
     }
+
+    // If this tab already locked in an elective earlier this session, restore
+    // and disable the dropdown so it can't be changed a second time.
+    const lockedElective = sessionStorage.getItem(HS_ELECTIVE_KEY);
+    const isElectiveLocked = sessionStorage.getItem(HS_ELECTIVE_LOCK_KEY) === 'true';
+    if (electiveSelect && lockedElective && isElectiveLocked) {
+        electiveSelect.value = lockedElective;
+        electiveSelect.disabled = true;
+        if (electiveLockedNote) electiveLockedNote.hidden = false;
+    }
 });
 
 loginForm.addEventListener('submit', async (e) => {
@@ -82,6 +100,12 @@ loginForm.addEventListener('submit', async (e) => {
     
     if (!tcCheckbox.checked) {
         showToast("Please agree to the Terms and Conditions to proceed.", 'error');
+        return;
+    }
+
+    const selectedElective = electiveSelect ? electiveSelect.value : '';
+    if (!selectedElective) {
+        showToast("Please select your HS elective to continue.", 'error');
         return;
     }
 
@@ -107,6 +131,14 @@ loginForm.addEventListener('submit', async (e) => {
                 localStorage.setItem('rememberedRoll', roll);
             } else {
                 localStorage.removeItem('rememberedRoll');
+            }
+
+            // Lock the elective choice in for this session only, the first time.
+            // Not written to localStorage or any database — sessionStorage clears
+            // itself when the tab/browser closes, so nothing lingers permanently.
+            if (sessionStorage.getItem(HS_ELECTIVE_LOCK_KEY) !== 'true') {
+                sessionStorage.setItem(HS_ELECTIVE_KEY, selectedElective);
+                sessionStorage.setItem(HS_ELECTIVE_LOCK_KEY, 'true');
             }
 
             showToast('Login successful — redirecting…', 'success', 1500);

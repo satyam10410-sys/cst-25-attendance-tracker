@@ -12,6 +12,55 @@ window.addEventListener('DOMContentLoaded', async () => {
     const user = JSON.parse(sessionData);
     let userAttendance = {};
 
+    // ==================== SELECTED HS ELECTIVE ====================
+    // Read what the person picked once on the login page (session-only,
+    // never written to localStorage or a database). Falls back to hs2110
+    // if, for some reason, nothing was stored (e.g. an older session).
+    const HS_ELECTIVE_INFO = {
+        "hs2110": {
+            code: "HS2110",
+            name: "Language, Human Mind and Indian Society",
+            ltpc: "L-T-P-C: 3-0-0-3",
+            image: "https://cdn-icons-png.flaticon.com/128/2942/2942076.png",
+            daysLabel: "[Wed,Thu,Fri]",
+            // Assumption: no specific time was given for HS2110, so it's set
+            // to the same 2–3 PM slot as the other electives. Adjust the
+            // "time" values below if the real timing differs.
+            schedule: [
+                { day: "Wednesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Thursday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Friday", time: "14:00 - 15:00", type: "Lecture" }
+            ]
+        },
+        "hs2111": {
+            code: "HS2111",
+            name: "Sociology",
+            ltpc: "L-T-P-C: 3-0-0-3",
+            image: "https://cdn-icons-png.flaticon.com/128/2942/2942076.png",
+            daysLabel: "[Tue,Wed,Thu]",
+            schedule: [
+                { day: "Tuesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Wednesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Thursday", time: "14:00 - 15:00", type: "Lecture" }
+            ]
+        },
+        "hs2112": {
+            code: "HS2112",
+            name: "Demography",
+            ltpc: "L-T-P-C: 3-0-0-3",
+            image: "https://cdn-icons-png.flaticon.com/128/2942/2942076.png",
+            daysLabel: "[Tue,Wed,Thu]",
+            schedule: [
+                { day: "Tuesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Wednesday", time: "14:00 - 15:00", type: "Lecture" },
+                { day: "Thursday", time: "14:00 - 15:00", type: "Lecture" }
+            ]
+        }
+    };
+
+    const selectedElectiveKey = (sessionStorage.getItem('selectedHSCourse') || 'hs2110').toLowerCase();
+    const electiveInfo = HS_ELECTIVE_INFO[selectedElectiveKey] || HS_ELECTIVE_INFO['hs2110'];
+
     // ------------------------------------------------------------------
     // TOAST NOTIFICATIONS
     // ------------------------------------------------------------------
@@ -210,6 +259,21 @@ window.addEventListener('DOMContentLoaded', async () => {
         showToast('Profile picture removed.', 'info', 3000);
     });
 
+    // Rewrite the placeholder HSS Elective-I sidebar entry to reflect the
+    // specific course the person picked at login (HS2110 / HS2111 / HS2112).
+    const hsListItem = document.querySelector('.courses ul li[data-code="HS21PQ"]');
+    if (hsListItem) {
+        hsListItem.dataset.code = electiveInfo.code;
+        hsListItem.dataset.title = electiveInfo.name.toUpperCase();
+        hsListItem.dataset.ltpc = electiveInfo.ltpc;
+        if (electiveInfo.image) hsListItem.dataset.image = electiveInfo.image;
+
+        const [nameP, codeP, daysP] = hsListItem.querySelectorAll('p');
+        if (nameP) nameP.textContent = electiveInfo.name;
+        if (codeP) codeP.textContent = electiveInfo.code;
+        if (daysP) daysP.textContent = electiveInfo.daysLabel;
+    }
+
     const courses = document.querySelectorAll('.courses ul li');
     const exploreText = document.getElementById('explore-state');
     const courseDetails = document.getElementById('course-details');
@@ -264,15 +328,14 @@ window.addEventListener('DOMContentLoaded', async () => {
                 { day: "Thursday", time: "15:00 - 15:55", type: "Lecture" }
             ]
         },
-        "HS21PQ": {
-            name: "HSS Elective-I", code: "HS21PQ",
-            schedule: [
-                { day: "Tuesday", time: "14:00 - 15:00", type: "Lecture" },
-                { day: "Wednesday", time: "15:00 - 16:00", type: "Lecture" },
-                { day: "Thursday", time: "16:00 - 17:00", type: "Lecture" },
-                { day: "Friday", time: "14:00 - 15:00", type: "Lecture" }
-            ]
-        }
+    };
+
+    // The elective slot is filled dynamically with whichever HS course was
+    // chosen at login, instead of a single hardcoded "HS21PQ" entry.
+    courseSchedule[electiveInfo.code] = {
+        name: electiveInfo.name,
+        code: electiveInfo.code,
+        schedule: electiveInfo.schedule
     };
 
     const courseProfessor = {
@@ -281,7 +344,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
         "CH2105": "Dr. Sujoy Kumar Samanta",
-        "HS21PQ": "professor_hss"
+        [electiveInfo.code]: "professor_hss"
     };
 
     const semesterStartDate = new Date('2026-07-28');
