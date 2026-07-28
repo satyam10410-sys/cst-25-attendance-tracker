@@ -292,19 +292,21 @@ app.post('/api/journal', verifyToken, async (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- KEEP-ALIVE SELF-PING ---
+// --- BULLETPROOF KEEP-ALIVE ---
 const https = require('https');
-const RENDER_URL = 'https://cst-25-attendance-tracker.onrender.com'; // Your live Render URL
+const RENDER_URL = 'https://cst-25-attendance-tracker.onrender.com';
 
-setInterval(() => {
-    https.get(RENDER_URL, (res) => {
-        console.log(`Self-ping keep-alive status: ${res.statusCode}`);
-    }).on('error', (err) => {
-        console.error('Self-ping error:', err.message);
-    });
+setInterval(async () => {
+    try {
+        // 1. Tap the Aiven Database to keep it awake
+        await pool.query('SELECT 1');
+        console.log('✅ Database keep-alive successful');
+
+        // 2. Tap the Render Server to keep it awake
+        https.get(RENDER_URL, (res) => {
+            console.log(`✅ Render keep-alive status: ${res.statusCode}`);
+        });
+    } catch (error) {
+        console.error('Keep-alive error:', error.message);
+    }
 }, 10 * 60 * 1000); // Runs every 10 minutes
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Backend server running on port ${PORT}`);
-});
