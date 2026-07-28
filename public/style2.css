@@ -1804,25 +1804,24 @@ body.dark-mode .time-slot {
     }
 }
 
+/* Professional No Class Today Button */
 .no-class-btn {
-    background-image: linear-gradient(135deg, #64748b, #94a3b8) !important;
-    color: #fff;
-    cursor: not-allowed;
-    opacity: 0.95;
+    background: rgba(148, 163, 184, 0.1) !important;
+    /* Subtle muted background */
+    background-image: none !important;
+    color: var(--text-light) !important;
+    /* Adapts to light/dark mode */
+    border: 2px dashed var(--border) !important;
+    /* Dashed border for empty state */
+    cursor: not-allowed !important;
+    box-shadow: none !important;
     animation: none !important;
-    box-shadow:
-        0 6px 18px rgba(100, 116, 139, 0.35),
-        inset 0 1px 1px rgba(255,255,255,0.2);
+    transform: none !important;
+    font-weight: 500 !important;
 }
 
 .no-class-btn:hover {
-    transform: none;
-    background-image: linear-gradient(135deg, #64748b, #94a3b8) !important;
-    box-shadow:
-        0 6px 18px rgba(100, 116, 139, 0.35),
-        inset 0 1px 1px rgba(255,255,255,0.2);
-}
-
-.no-class-btn:disabled {
-    opacity: 1;
+    background: rgba(148, 163, 184, 0.1) !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
