@@ -323,7 +323,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             name: "Fluid Mechanics", code: "CH2104",
             schedule: [
                 { day: "Monday", time: "16:00 - 16:55", type: "Lecture" },
-                { day: "Wednesday", time: "15:00 - 15:55", type: "Lecture" },
+                { day: "Wednesday", time: "15:00 - 16:55", type: "Lecture" },
                 { day: "Friday", time: "10:00 - 11:00", type: "Lab" },
                 { day: "Friday", time: "15:00 - 15:55", type: "Lecture" }
             ]
@@ -351,7 +351,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     const courseProfessor = {
         "CH2101": "Dr. Rajendra Kumar Konidena",
-        "CH2102": "professor_inorganic",
+        "CH2102": "Dr. Neeladri Das",
         "CH2103": "professor_quantum",
         "CH2104": "professor_fluid",
         "CH2105": "Dr. Sujoy Kumar Samanta",
