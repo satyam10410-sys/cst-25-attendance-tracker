@@ -18,6 +18,13 @@ const electiveLockedNote = document.getElementById('electiveLockedNote');
 const HS_ELECTIVE_KEY = 'selectedHSCourse';
 const HS_ELECTIVE_LOCK_KEY = 'hsCourseLocked';
 
+// "Remember me" now means a real stay-signed-in session on this device: the
+// auth TOKEN (never the password) is kept in localStorage so it survives
+// closing the browser. It's cleared on explicit logout or if the token turns
+// out to be expired/invalid (see user.js).
+const REMEMBERED_TOKEN_KEY = 'rememberedAuthToken';
+const REMEMBERED_USER_KEY = 'rememberedUser';
+
 // ------------------------------------------------------------------
 // TOAST NOTIFICATIONS
 // Small glass-panel messages instead of blocking alert() popups.
@@ -93,6 +100,20 @@ window.addEventListener('DOMContentLoaded', () => {
         electiveSelect.disabled = true;
         if (electiveLockedNote) electiveLockedNote.hidden = false;
     }
+
+    // Stay-signed-in: if a remembered token exists on this device, skip the
+    // form entirely and go straight to the dashboard. If the token has
+    // expired, user.js will bounce back here and clear it — no loop, since
+    // that clears these same keys first.
+    const rememberedToken = localStorage.getItem(REMEMBERED_TOKEN_KEY);
+    const rememberedUser = localStorage.getItem(REMEMBERED_USER_KEY);
+    if (rememberedToken && rememberedUser) {
+        sessionStorage.setItem('authToken', rememberedToken);
+        sessionStorage.setItem('currentUser', rememberedUser);
+        setLoginLoading(true);
+        showToast('Welcome back — signing you in…', 'success', 1200);
+        window.location.href = "user.html";
+    }
 });
 
 loginForm.addEventListener('submit', async (e) => {
@@ -129,8 +150,12 @@ loginForm.addEventListener('submit', async (e) => {
 
             if (rememberCheckbox.checked) {
                 localStorage.setItem('rememberedRoll', roll);
+                localStorage.setItem(REMEMBERED_TOKEN_KEY, data.token);
+                localStorage.setItem(REMEMBERED_USER_KEY, JSON.stringify(data.user));
             } else {
                 localStorage.removeItem('rememberedRoll');
+                localStorage.removeItem(REMEMBERED_TOKEN_KEY);
+                localStorage.removeItem(REMEMBERED_USER_KEY);
             }
 
             // Lock the elective choice in for this session only, the first time.

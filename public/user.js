@@ -1,12 +1,23 @@
 const API_BASE_URL = 'https://cst-25-attendance-tracker.onrender.com';
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const sessionData = sessionStorage.getItem('currentUser');
-    const authToken = sessionStorage.getItem('authToken');
+    let sessionData = sessionStorage.getItem('currentUser');
+    let authToken = sessionStorage.getItem('authToken');
 
+    // No active tab session (e.g. browser was closed and reopened) — fall
+    // back to the remembered stay-signed-in token, if "Remember me" was used.
     if (!sessionData || !authToken) {
-        window.location.href = "cst.html";
-        return;
+        const rememberedToken = localStorage.getItem('rememberedAuthToken');
+        const rememberedUser = localStorage.getItem('rememberedUser');
+        if (rememberedToken && rememberedUser) {
+            sessionStorage.setItem('authToken', rememberedToken);
+            sessionStorage.setItem('currentUser', rememberedUser);
+            sessionData = rememberedUser;
+            authToken = rememberedToken;
+        } else {
+            window.location.href = "cst.html";
+            return;
+        }
     }
 
     const user = JSON.parse(sessionData);
@@ -115,6 +126,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (response.status === 401 || response.status === 403) {
             sessionStorage.removeItem('currentUser');
             sessionStorage.removeItem('authToken');
+            localStorage.removeItem('rememberedAuthToken');
+            localStorage.removeItem('rememberedUser');
             window.location.href = "cst.html";
             return;
         }
@@ -700,6 +713,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('logoutBtn').addEventListener('click', () => {
         sessionStorage.removeItem('currentUser');
         sessionStorage.removeItem('authToken');
+        localStorage.removeItem('rememberedAuthToken');
+        localStorage.removeItem('rememberedUser');
+        localStorage.removeItem('rememberedRoll');
         window.location.href = "cst.html";
     });
 
