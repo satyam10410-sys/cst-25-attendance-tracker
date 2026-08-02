@@ -352,7 +352,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const courseProfessor = {
         "CH2101": "Dr. Rajendra Kumar Konidena",
         "CH2102": "Dr. Neeladri Das",
-        "CH2103": "professor_quantum",
+        "CH2103": "Dr. T. Rajagopala Rao",
         "CH2104": "professor_fluid",
         "CH2105": "Dr. Sujoy Kumar Samanta",
         [ATTENDANCE_BACKEND_KEY]: "professor_hss"
