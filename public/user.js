@@ -470,7 +470,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                             time: slot.time,
                             exactTime: startTime,
                             isHappeningNow: isHappeningNow,
-                            type: slot.type || ''
+                            type: slot.type || '',
+                            location: slot.location || ''
                         });
                     }
                 }
@@ -495,7 +496,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             <div class="time-slot">${cls.time}</div>
             <div class="class-info">
                 <h4>${cls.name} ${classTypeBadge} ${liveBadge}</h4>
-                <small>Today • ${cls.code}</small>
+                <small>Today • ${cls.code} ${cls.location ? `• ${cls.location}` : ''}</small>
             </div>
         `;
             container.appendChild(item);
