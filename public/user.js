@@ -366,7 +366,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2101": "Dr. Rajendra Kumar Konidena",
         "CH2102": "Dr. Neeladri Das",
         "CH2103": "Dr. T. Rajagopala Rao",
-        "CH2104": "professor_fluid",
+        "CH2104": "Dr. Lalita Kanwar Shekhawat",
         "CH2105": "Dr. Sujoy Kumar Samanta",
         [ATTENDANCE_BACKEND_KEY]: "professor_hss"
     };
