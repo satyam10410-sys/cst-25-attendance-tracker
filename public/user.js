@@ -318,7 +318,6 @@ window.addEventListener('DOMContentLoaded', async () => {
             name: "Inorganic Chemistry", code: "CH2102",
             schedule: [
                 { day: "Wednesday", time: "11:00 - 11:55", type: "Lecture" },
-                { day: "Thursday", time: "10:00 - 10:55", type: "Tutorial" },
                 { day: "Thursday", time: "11:00 - 11:55", type: "Lecture" },
                 { day: "Friday", time: "12:00 - 12:55", type: "Lecture" }
             ]
