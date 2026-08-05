@@ -308,45 +308,45 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2101": {
             name: "Organic Chemistry", code: "CH2101",
             schedule: [
-                { day: "Tuesday", time: "16:00 - 16:55", type: "Lecture" },
-                { day: "Wednesday", time: "09:00 - 09:55", type: "Tutorial" },
-                { day: "Wednesday", time: "10:00 - 10:55", type: "Lecture" },
-                { day: "Friday", time: "17:00 - 17:55", type: "Lecture" }
+                { day: "Tuesday", time: "16:00 - 16:55", type: "Lecture", location: "📍R305" },
+                { day: "Wednesday", time: "09:00 - 09:55", type: "Tutorial", location: "📍R306" },
+                { day: "Wednesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R306" },
+                { day: "Friday", time: "17:00 - 17:55", type: "Lecture", location: "📍R305" }
             ]
         },
         "CH2102": {
             name: "Inorganic Chemistry", code: "CH2102",
             schedule: [
-                { day: "Wednesday", time: "11:00 - 11:55", type: "Lecture" },
-                { day: "Thursday", time: "10:00 - 10:55", type: "Tutorial"},
-                { day: "Thursday", time: "11:00 - 11:55", type: "Lecture" },
-                { day: "Friday", time: "12:00 - 12:55", type: "Lecture" }
+                { day: "Wednesday", time: "11:00 - 11:55", type: "Lecture", location: "📍R306" },
+                { day: "Thursday", time: "10:00 - 10:55", type: "Tutorial", location: "📍R306" },
+                { day: "Thursday", time: "11:00 - 11:55", type: "Lecture", location : "📍R306" },
+                { day: "Friday", time: "12:00 - 12:55", type: "Lecture", location: "📍R306" }
             ]
         },
         "CH2103": {
             name: "Introduction to Quantum Chemistry", code: "CH2103",
             schedule: [
-                { day: "Monday", time: "17:00 - 17:55", type: "Lecture" },
-                { day: "Thursday", time: "17:00 - 17:55", type: "Lecture" },
-                { day: "Friday", time: "09:00 - 09:55", type: "Tutorial" },
-                { day: "Friday", time: "16:00 - 16:55", type: "Lecture" }
+                { day: "Monday", time: "17:00 - 17:55", type: "Lecture", location: "📍R306" },
+                { day: "Thursday", time: "17:00 - 17:55", type: "Lecture", location: "📍R306" },
+                { day: "Friday", time: "09:00 - 09:55", type: "Tutorial", location: "📍R305" },
+                { day: "Friday", time: "16:00 - 16:55", type: "Lecture", location: "📍R305" }
             ]
         },
         "CH2104": {
             name: "Fluid Mechanics", code: "CH2104",
             schedule: [
-                { day: "Monday", time: "16:00 - 16:55", type: "Lecture" },
-                { day: "Wednesday", time: "15:00 - 16:55", type: "Lecture" },
-                { day: "Friday", time: "10:00 - 11:00", type: "Lab" },
-                { day: "Friday", time: "15:00 - 15:55", type: "Lecture" }
+                { day: "Monday", time: "16:00 - 16:55", type: "Lecture", location: "📍R102 with CBE" },
+                { day: "Wednesday", time: "15:00 - 16:55", type: "Lecture", location: "📍R102 with CBE" },
+                { day: "Friday", time: "10:00 - 11:00", type: "Lab", location: "📍 Chemical Engineering Workshop" },
+                { day: "Friday", time: "15:00 - 15:55", type: "Lecture", location: "📍R102 with CBE" }
             ]
         },
         "CH2105": {
             name: "Chemical Process Calculations", code: "CH2105",
             schedule: [
-                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture" },
-                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture" },
-                { day: "Thursday", time: "15:00 - 15:55", type: "Lecture" }
+                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R102/LT001" },
+                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture", location: "📍R102/LT001" },
+                { day: "Thursday", time: "15:00 - 15:55", type: "Lecture", location: "📍R102/LT001" }
             ]
         },
     };
