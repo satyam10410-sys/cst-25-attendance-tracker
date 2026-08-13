@@ -327,7 +327,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             name: "Introduction to Quantum Chemistry", code: "CH2103",
             schedule: [
                 { day: "Monday", time: "17:00 - 17:55", type: "Lecture", location: "📍R306" },
-                { day: "Thursday", time: "17:00 - 17:55", type: "Lecture", location: "📍R306" },
+                { day: "Thursday", time: "15:00 - 15:55", type: "Lecture", location: "📍R306" },
                 { day: "Friday", time: "09:00 - 09:55", type: "Tutorial", location: "📍R305" },
                 { day: "Friday", time: "16:00 - 16:55", type: "Lecture", location: "📍R305" }
             ]
@@ -346,7 +346,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             schedule: [
                 { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R102" },
                 { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture", location: "📍LT001" },
-                { day: "Thursday", time: "15:00 - 16:55", type: "Lecture", location: "📍LT001" }
+                { day: "Thursday", time: "16:00 - 17:55", type: "Lecture", location: "📍LT001" }
             ]
         },
     };
