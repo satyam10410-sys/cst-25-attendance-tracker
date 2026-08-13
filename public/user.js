@@ -346,7 +346,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             schedule: [
                 { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R102/LT001" },
                 { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture", location: "📍R102/LT001" },
-                { day: "Thursday", time: "15:00 - 15:55", type: "Lecture", location: "📍R102/LT001" }
+                { day: "Thursday", time: "15:00 - 16:55", type: "Lecture", location: "📍R102/LT001" }
             ]
         },
     };
