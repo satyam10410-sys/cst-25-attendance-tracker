@@ -344,9 +344,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         "CH2105": {
             name: "Chemical Process Calculations", code: "CH2105",
             schedule: [
-                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R102/LT001" },
-                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture", location: "📍R102/LT001" },
-                { day: "Thursday", time: "15:00 - 16:55", type: "Lecture", location: "📍R102/LT001" }
+                { day: "Tuesday", time: "10:00 - 10:55", type: "Lecture", location: "📍R102" },
+                { day: "Wednesday", time: "17:00 - 17:55", type: "Lecture", location: "📍LT001" },
+                { day: "Thursday", time: "15:00 - 16:55", type: "Lecture", location: "📍LT001" }
             ]
         },
     };
