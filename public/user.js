@@ -38,9 +38,9 @@ window.addEventListener('DOMContentLoaded', async () => {
             // to the same 2–3 PM slot as the other electives. Adjust the
             // "time" values below if the real timing differs.
             schedule: [
-                { day: "Wednesday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT003" },
-                { day: "Thursday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT003" },
-                { day: "Friday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT003" }
+                { day: "Wednesday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT103" },
+                { day: "Thursday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT103" },
+                { day: "Friday", time: "14:00 - 15:00", type: "Lecture", location: "📍LT103" }
             ]
         },
         "hs2111": {
